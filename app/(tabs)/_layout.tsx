@@ -4,7 +4,7 @@ import { Stack } from 'expo-router';
 import FloatingTabBar, { TabBarItem } from '@/components/FloatingTabBar';
 
 export default function TabLayout() {
-  // Define the tabs configuration for AITHLETE with proper icon mappings
+  // Define the tabs configuration for AITHLETE with logical icon names
   const tabs: TabBarItem[] = [
     {
       name: '(home)',
@@ -15,31 +15,31 @@ export default function TabLayout() {
     {
       name: 'workout',
       route: '/(tabs)/workout',
-      icon: 'fitness_center',
+      icon: 'workout',
       label: 'Workout',
     },
     {
       name: 'posture',
       route: '/(tabs)/posture',
-      icon: 'accessibility_new',
+      icon: 'posture',
       label: 'Posture',
     },
     {
       name: 'projection',
       route: '/(tabs)/projection',
-      icon: 'visibility',
+      icon: 'projection',
       label: 'Projection',
     },
     {
       name: 'progress',
       route: '/(tabs)/progress',
-      icon: 'trending_up',
+      icon: 'progress',
       label: 'Progress',
     },
     {
       name: 'profile',
       route: '/(tabs)/profile',
-      icon: 'person',
+      icon: 'profile',
       label: 'Profile',
     },
   ];

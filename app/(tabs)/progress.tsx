@@ -20,7 +20,7 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, unit, change, ico
     <View style={styles.metricCard}>
       <View style={styles.metricHeader}>
         <IconSymbol
-          ios_icon_name="chart.line.uptrend.xyaxis"
+          ios_icon_name={icon}
           android_material_icon_name={icon}
           size={24}
           color={colors.text}
@@ -40,10 +40,10 @@ export default function ProgressScreen() {
   const theme = useTheme();
 
   const metrics = [
-    { title: "Weight", value: "0", unit: "kg", change: "+0 kg this week", icon: "monitor_weight" },
-    { title: "Calories", value: "0", unit: "kcal", change: "0 kcal today", icon: "local_fire_department" },
-    { title: "Workouts", value: "0", unit: "total", change: "0 this week", icon: "fitness_center" },
-    { title: "Posture Score", value: "0", unit: "%", change: "+0% improvement", icon: "accessibility_new" },
+    { title: "Weight", value: "0", unit: "kg", change: "+0 kg this week", icon: "weight" },
+    { title: "Calories", value: "0", unit: "kcal", change: "0 kcal today", icon: "calories" },
+    { title: "Workouts", value: "0", unit: "total", change: "0 this week", icon: "fitness" },
+    { title: "Posture Score", value: "0", unit: "%", change: "+0% improvement", icon: "body" },
   ];
 
   return (

@@ -38,7 +38,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
             <View style={styles.iconGlow} />
             <IconSymbol 
               ios_icon_name={iosIcon}
-              android_material_icon_name={icon as any}
+              android_material_icon_name={icon}
               size={32} 
               color="#FFFFFF" 
             />
@@ -52,7 +52,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
               <View style={styles.metaBadge}>
                 <IconSymbol 
                   ios_icon_name="clock"
-                  android_material_icon_name="schedule"
+                  android_material_icon_name="clock"
                   size={14} 
                   color={colors.textSecondary} 
                 />
@@ -61,7 +61,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({
               <View style={styles.metaBadge}>
                 <IconSymbol 
                   ios_icon_name="flame"
-                  android_material_icon_name="local_fire_department"
+                  android_material_icon_name="flame"
                   size={14} 
                   color={colors.textSecondary} 
                 />
@@ -105,16 +105,16 @@ export default function WorkoutScreen() {
       description: "Build overall muscle and power",
       duration: "45 min",
       difficulty: "Intermediate",
-      icon: "fitness_center",
-      iosIcon: "figure.strengthtraining.traditional",
+      icon: "workout",
+      iosIcon: "workout",
     },
     {
       title: "Core Conditioning",
       description: "Strengthen your core muscles",
       duration: "30 min",
       difficulty: "Beginner",
-      icon: "self_improvement",
-      iosIcon: "figure.core.training",
+      icon: "meditation",
+      iosIcon: "meditation",
     },
   ];
 
@@ -124,8 +124,8 @@ export default function WorkoutScreen() {
       description: "Chest, shoulders, and arms",
       duration: "50 min",
       difficulty: "Advanced",
-      icon: "fitness_center",
-      iosIcon: "figure.arms.open",
+      icon: "workout",
+      iosIcon: "workout",
     },
   ];
 
@@ -135,24 +135,24 @@ export default function WorkoutScreen() {
       description: "Quads, hamstrings, and glutes",
       duration: "55 min",
       difficulty: "Advanced",
-      icon: "directions_run",
-      iosIcon: "figure.run",
+      icon: "run",
+      iosIcon: "run",
     },
     {
       title: "Cardio Blast",
       description: "High-intensity interval training",
       duration: "35 min",
       difficulty: "Intermediate",
-      icon: "favorite",
-      iosIcon: "heart.fill",
+      icon: "heart",
+      iosIcon: "heart",
     },
     {
       title: "Flexibility & Mobility",
       description: "Improve range of motion",
       duration: "25 min",
       difficulty: "Beginner",
-      icon: "self_improvement",
-      iosIcon: "figure.flexibility",
+      icon: "flexibility",
+      iosIcon: "flexibility",
     },
   ];
 
@@ -322,8 +322,8 @@ export default function WorkoutScreen() {
                   <View style={styles.exerciseHeader}>
                     <Text style={styles.exerciseName}>{exercise.name}</Text>
                     <IconSymbol
-                      ios_icon_name="checkmark.circle"
-                      android_material_icon_name="check_circle"
+                      ios_icon_name="checkmark"
+                      android_material_icon_name="checkmark"
                       size={24}
                       color={colors.textSecondary}
                     />

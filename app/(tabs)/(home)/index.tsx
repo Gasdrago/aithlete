@@ -50,29 +50,29 @@ export default function HomeScreen() {
     {
       title: "AI Workout Generator",
       description: "Get personalized workout plans powered by AI",
-      icon: "fitness_center",
-      iosIcon: "figure.strengthtraining.traditional",
+      icon: "workout",
+      iosIcon: "workout",
       route: "/(tabs)/workout"
     },
     {
       title: "AI Posture Check",
       description: "Real-time form analysis with camera",
-      icon: "accessibility_new",
-      iosIcon: "figure.walk",
+      icon: "posture",
+      iosIcon: "posture",
       route: "/(tabs)/posture"
     },
     {
       title: "AI Body Projection",
       description: "See your future physique in 3, 6, 12 months",
-      icon: "visibility",
-      iosIcon: "eye.fill",
+      icon: "projection",
+      iosIcon: "projection",
       route: "/(tabs)/projection"
     },
     {
       title: "Progress Dashboard",
       description: "Track your fitness journey and metrics",
-      icon: "trending_up",
-      iosIcon: "chart.line.uptrend.xyaxis",
+      icon: "progress",
+      iosIcon: "progress",
       route: "/(tabs)/progress"
     },
   ];
