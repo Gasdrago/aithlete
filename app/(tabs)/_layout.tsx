@@ -4,7 +4,7 @@ import { Stack } from 'expo-router';
 import FloatingTabBar, { TabBarItem } from '@/components/FloatingTabBar';
 
 export default function TabLayout() {
-  // Define the tabs configuration for AITHLETE with Body Projection
+  // Define the tabs configuration for AITHLETE with proper icon mappings
   const tabs: TabBarItem[] = [
     {
       name: '(home)',

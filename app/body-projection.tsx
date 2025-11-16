@@ -1,11 +1,12 @@
 
 import React, { useState } from "react";
-import { ScrollView, StyleSheet, View, Text, TouchableOpacity, Image, Alert } from "react-native";
+import { ScrollView, StyleSheet, View, Text, TouchableOpacity, Image, Alert, Platform } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { colors } from "@/styles/commonStyles";
 import { IconSymbol } from "@/components/IconSymbol";
 import { router } from "expo-router";
 import * as ImagePicker from 'expo-image-picker';
+import { TAB_BAR_HEIGHT } from "@/components/FloatingTabBar";
 
 export default function BodyProjectionScreen() {
   const theme = useTheme();
@@ -75,7 +76,10 @@ export default function BodyProjectionScreen() {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ScrollView 
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[
+          styles.scrollContent,
+          { paddingBottom: TAB_BAR_HEIGHT + 20 }
+        ]}
         showsVerticalScrollIndicator={false}
       >
         {/* Header */}
@@ -245,8 +249,6 @@ export default function BodyProjectionScreen() {
             </TouchableOpacity>
           </View>
         )}
-
-        <View style={{ height: 40 }} />
       </ScrollView>
     </View>
   );
@@ -257,7 +259,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingTop: 60,
+    paddingTop: Platform.OS === 'android' ? 60 : 80,
     paddingHorizontal: 20,
   },
   header: {

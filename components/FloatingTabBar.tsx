@@ -35,6 +35,7 @@ interface FloatingTabBarProps {
 }
 
 const { width: screenWidth } = Dimensions.get('window');
+export const TAB_BAR_HEIGHT = 90; // Export for use in other components
 
 export default function FloatingTabBar({
   tabs,
@@ -116,7 +117,7 @@ export default function FloatingTabBar({
                 >
                   <View style={styles.tabContent}>
                     <IconSymbol
-                      android_material_icon_name={tab.icon}
+                      android_material_icon_name={tab.icon as any}
                       ios_icon_name={tab.icon}
                       size={24}
                       color={isActive ? '#FFFFFF' : '#888888'}
@@ -236,15 +237,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 8,
+    height: 60,
   },
   tabContent: {
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
   tabLabel: {
     fontSize: 11,
     marginTop: 4,
     fontFamily: 'Inter_400Regular',
     letterSpacing: 0.5,
+    textAlign: 'center',
   },
 });
