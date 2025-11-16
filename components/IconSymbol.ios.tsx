@@ -13,6 +13,23 @@ const IOS_ICON_MAP: Record<string, string> = {
   progress: 'chart.line.uptrend.xyaxis',
   profile: 'person.fill',
   
+  // Profile screen icons
+  edit: 'pencil',
+  'person-outline': 'person',
+  flag: 'flag.fill',
+  target: 'target',
+  goals: 'flag.fill',
+  settings: 'gearshape.fill',
+  notifications: 'bell.fill',
+  logout: 'rectangle.portrait.and.arrow.right',
+  'exit-to-app': 'rectangle.portrait.and.arrow.right',
+  lock: 'lock.fill',
+  straighten: 'ruler.fill',
+  info: 'info.circle.fill',
+  help: 'questionmark.circle.fill',
+  description: 'doc.text.fill',
+  policy: 'shield.fill',
+  
   // Additional icons used in the app
   schedule: 'clock.fill',
   clock: 'clock.fill',
@@ -29,6 +46,17 @@ const IOS_ICON_MAP: Record<string, string> = {
   calories: 'flame.fill',
   fitness: 'figure.strengthtraining.traditional',
   body: 'figure.stand',
+  
+  // Camera and posture icons
+  camera: 'camera.fill',
+  'camera-alt': 'camera.fill',
+  'flip-camera-ios': 'camera.rotate',
+  'camera-rotate': 'camera.rotate',
+  
+  // Navigation icons
+  'chevron-right': 'chevron.right',
+  'account-circle': 'person.circle.fill',
+  'person-circle': 'person.circle.fill',
 };
 
 // Mapping of logical icon names to Material Icons (fallback)
@@ -40,6 +68,23 @@ const ICON_MAP: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   projection: 'visibility',
   progress: 'trending-up',
   profile: 'person',
+  
+  // Profile screen icons
+  edit: 'edit',
+  'person-outline': 'person-outline',
+  flag: 'flag',
+  target: 'flag',
+  goals: 'flag',
+  settings: 'settings',
+  notifications: 'notifications',
+  logout: 'logout',
+  'exit-to-app': 'exit-to-app',
+  lock: 'lock',
+  straighten: 'straighten',
+  info: 'info',
+  help: 'help',
+  description: 'description',
+  policy: 'policy',
   
   // Additional icons used in the app
   schedule: 'schedule',
@@ -57,6 +102,17 @@ const ICON_MAP: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   calories: 'local-fire-department',
   fitness: 'fitness-center',
   body: 'accessibility-new',
+  
+  // Camera and posture icons
+  camera: 'camera-alt',
+  'camera-alt': 'camera-alt',
+  'flip-camera-ios': 'flip-camera-ios',
+  'camera-rotate': 'flip-camera-ios',
+  
+  // Navigation icons
+  'chevron-right': 'chevron-right',
+  'account-circle': 'account-circle',
+  'person-circle': 'account-circle',
 };
 
 export function IconSymbol({

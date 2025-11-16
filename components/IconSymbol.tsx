@@ -21,6 +21,23 @@ const ICON_MAP: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   progress: 'trending-up',
   profile: 'person',
   
+  // Profile screen icons
+  edit: 'edit',
+  'person-outline': 'person-outline',
+  flag: 'flag',
+  target: 'flag',
+  goals: 'flag',
+  settings: 'settings',
+  notifications: 'notifications',
+  logout: 'logout',
+  'exit-to-app': 'exit-to-app',
+  lock: 'lock',
+  straighten: 'straighten',
+  info: 'info',
+  help: 'help',
+  description: 'description',
+  policy: 'policy',
+  
   // Additional icons used in the app
   schedule: 'schedule',
   clock: 'schedule',
@@ -37,6 +54,17 @@ const ICON_MAP: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   calories: 'local-fire-department',
   fitness: 'fitness-center',
   body: 'accessibility-new',
+  
+  // Camera and posture icons
+  camera: 'camera-alt',
+  'camera-alt': 'camera-alt',
+  'flip-camera-ios': 'flip-camera-ios',
+  'camera-rotate': 'flip-camera-ios',
+  
+  // Navigation icons
+  'chevron-right': 'chevron-right',
+  'account-circle': 'account-circle',
+  'person-circle': 'account-circle',
 };
 
 /**

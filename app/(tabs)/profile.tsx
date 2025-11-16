@@ -4,29 +4,39 @@ import { ScrollView, StyleSheet, View, Text, TouchableOpacity, Platform } from "
 import { useTheme } from "@react-navigation/native";
 import { colors } from "@/styles/commonStyles";
 import { IconSymbol } from "@/components/IconSymbol";
+import { BlurView } from "expo-blur";
+import { TAB_BAR_HEIGHT } from "@/components/FloatingTabBar";
 
 interface SettingItemProps {
   title: string;
   icon: string;
+  iosIcon: string;
   onPress?: () => void;
+  isLast?: boolean;
 }
 
-const SettingItem: React.FC<SettingItemProps> = ({ title, icon, onPress }) => {
+const SettingItem: React.FC<SettingItemProps> = ({ title, icon, iosIcon, onPress, isLast }) => {
   return (
-    <TouchableOpacity style={styles.settingItem} onPress={onPress} activeOpacity={0.7}>
+    <TouchableOpacity 
+      style={[styles.settingItem, isLast && styles.settingItemLast]} 
+      onPress={onPress} 
+      activeOpacity={0.7}
+    >
       <View style={styles.settingLeft}>
-        <IconSymbol
-          ios_icon_name="gear"
-          android_material_icon_name={icon}
-          size={24}
-          color={colors.text}
-        />
+        <View style={styles.iconContainer}>
+          <IconSymbol
+            ios_icon_name={iosIcon}
+            android_material_icon_name={icon}
+            size={22}
+            color={colors.text}
+          />
+        </View>
         <Text style={styles.settingTitle}>{title}</Text>
       </View>
       <IconSymbol
         ios_icon_name="chevron.right"
-        android_material_icon_name="chevron_right"
-        size={20}
+        android_material_icon_name="chevron-right"
+        size={18}
         color={colors.textSecondary}
       />
     </TouchableOpacity>
@@ -44,24 +54,34 @@ export default function ProfileScreen() {
       >
         <View style={styles.header}>
           <Text style={styles.title}>Profile</Text>
+          <Text style={styles.subtitle}>Manage your AITHLETE account</Text>
         </View>
 
-        {/* Profile Card */}
-        <View style={styles.profileCard}>
+        {/* Profile Card with Liquid Glass */}
+        <BlurView intensity={20} tint="dark" style={styles.profileCard}>
+          <View style={styles.glassOverlay} />
+          <View style={styles.topEngravedLine} />
+          
           <View style={styles.avatarContainer}>
-            <IconSymbol
-              ios_icon_name="person.circle.fill"
-              android_material_icon_name="account_circle"
-              size={80}
-              color={colors.text}
-            />
+            <View style={styles.avatarGlow}>
+              <IconSymbol
+                ios_icon_name="person-circle"
+                android_material_icon_name="account-circle"
+                size={90}
+                color={colors.text}
+              />
+            </View>
           </View>
+          
           <Text style={styles.profileName}>Athlete</Text>
           <Text style={styles.profileEmail}>athlete@aithlete.app</Text>
-        </View>
+          
+          <View style={styles.bottomEngravedLine} />
+        </BlurView>
 
-        {/* Stats Overview */}
-        <View style={styles.statsSection}>
+        {/* Stats Overview with Liquid Glass */}
+        <BlurView intensity={20} tint="dark" style={styles.statsSection}>
+          <View style={styles.glassOverlay} />
           <View style={styles.statItem}>
             <Text style={styles.statValue}>0</Text>
             <Text style={styles.statLabel}>Workouts</Text>
@@ -76,35 +96,79 @@ export default function ProfileScreen() {
             <Text style={styles.statValue}>0</Text>
             <Text style={styles.statLabel}>Achievements</Text>
           </View>
-        </View>
+        </BlurView>
 
         {/* Settings Section */}
         <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>Settings</Text>
-          <View style={styles.settingsCard}>
-            <SettingItem title="Edit Profile" icon="edit" />
-            <SettingItem title="Fitness Goals" icon="flag" />
-            <SettingItem title="Notifications" icon="notifications" />
-            <SettingItem title="Privacy" icon="lock" />
-            <SettingItem title="Units & Measurements" icon="straighten" />
-          </View>
+          <Text style={styles.sectionTitle}>Account</Text>
+          <BlurView intensity={20} tint="dark" style={styles.settingsCard}>
+            <View style={styles.glassOverlay} />
+            <SettingItem 
+              title="Edit Profile" 
+              icon="edit" 
+              iosIcon="edit"
+            />
+            <SettingItem 
+              title="Fitness Goals" 
+              icon="flag" 
+              iosIcon="goals"
+            />
+            <SettingItem 
+              title="Notifications" 
+              icon="notifications" 
+              iosIcon="notifications"
+            />
+            <SettingItem 
+              title="Privacy" 
+              icon="lock" 
+              iosIcon="lock"
+              isLast
+            />
+          </BlurView>
         </View>
 
         {/* App Section */}
         <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>App</Text>
-          <View style={styles.settingsCard}>
-            <SettingItem title="About AITHLETE" icon="info" />
-            <SettingItem title="Help & Support" icon="help" />
-            <SettingItem title="Terms of Service" icon="description" />
-            <SettingItem title="Privacy Policy" icon="policy" />
-          </View>
+          <Text style={styles.sectionTitle}>Support</Text>
+          <BlurView intensity={20} tint="dark" style={styles.settingsCard}>
+            <View style={styles.glassOverlay} />
+            <SettingItem 
+              title="About AITHLETE" 
+              icon="info" 
+              iosIcon="info"
+            />
+            <SettingItem 
+              title="Help & Support" 
+              icon="help" 
+              iosIcon="help"
+            />
+            <SettingItem 
+              title="Terms of Service" 
+              icon="description" 
+              iosIcon="description"
+              isLast
+            />
+          </BlurView>
+        </View>
+
+        {/* Logout Section */}
+        <View style={styles.settingsSection}>
+          <BlurView intensity={20} tint="dark" style={styles.settingsCard}>
+            <View style={styles.glassOverlay} />
+            <SettingItem 
+              title="Logout" 
+              icon="exit-to-app" 
+              iosIcon="logout"
+              isLast
+            />
+          </BlurView>
         </View>
 
         {/* Version */}
         <Text style={styles.versionText}>AITHLETE v1.0.0</Text>
+        <Text style={styles.versionSubtext}>Powered by AI • Inspired by the Gods</Text>
 
-        <View style={{ height: 120 }} />
+        <View style={{ height: TAB_BAR_HEIGHT + 20 }} />
       </ScrollView>
     </View>
   );
@@ -122,43 +186,82 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   title: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: '700',
     color: colors.text,
     fontFamily: 'PlayfairDisplay_700Bold',
+    letterSpacing: 1,
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: colors.textSecondary,
+    fontFamily: 'Inter_400Regular',
   },
   profileCard: {
-    backgroundColor: colors.card,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 20,
+    borderRadius: 24,
     padding: 32,
     alignItems: 'center',
     marginBottom: 24,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+  },
+  glassOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+  },
+  topEngravedLine: {
+    position: 'absolute',
+    top: 0,
+    left: 30,
+    right: 30,
+    height: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  bottomEngravedLine: {
+    position: 'absolute',
+    bottom: 0,
+    left: 30,
+    right: 30,
+    height: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
   avatarContainer: {
-    marginBottom: 16,
+    marginBottom: 20,
+    marginTop: 8,
+  },
+  avatarGlow: {
+    shadowColor: '#FFFFFF',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.3,
+    shadowRadius: 20,
+    elevation: 8,
   },
   profileName: {
-    fontSize: 24,
-    fontWeight: '600',
+    fontSize: 28,
+    fontWeight: '700',
     color: colors.text,
-    fontFamily: 'PlayfairDisplay_600SemiBold',
-    marginBottom: 4,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    marginBottom: 6,
+    letterSpacing: 1,
   },
   profileEmail: {
     fontSize: 14,
     color: colors.textSecondary,
     fontFamily: 'Inter_400Regular',
+    marginBottom: 8,
   },
   statsSection: {
     flexDirection: 'row',
-    backgroundColor: colors.card,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: 20,
+    padding: 24,
     marginBottom: 32,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
   },
   statItem: {
     flex: 1,
@@ -167,49 +270,63 @@ const styles = StyleSheet.create({
   statDivider: {
     width: 1,
     backgroundColor: colors.border,
+    marginHorizontal: 8,
   },
   statValue: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: '700',
     color: colors.text,
     fontFamily: 'Inter_700Bold',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   statLabel: {
-    fontSize: 12,
+    fontSize: 11,
     color: colors.textSecondary,
     fontFamily: 'Inter_400Regular',
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
   settingsSection: {
     marginBottom: 24,
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '600',
     color: colors.text,
     fontFamily: 'PlayfairDisplay_600SemiBold',
     marginBottom: 12,
+    letterSpacing: 0.5,
   },
   settingsCard: {
-    backgroundColor: colors.card,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 16,
+    borderRadius: 20,
     overflow: 'hidden',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
   },
   settingItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 16,
+    padding: 18,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
+  },
+  settingItemLast: {
+    borderBottomWidth: 0,
   },
   settingLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
+    gap: 14,
+  },
+  iconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   settingTitle: {
     fontSize: 16,
@@ -217,11 +334,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_400Regular',
   },
   versionText: {
-    fontSize: 12,
+    fontSize: 13,
+    color: colors.textSecondary,
+    fontFamily: 'Inter_600SemiBold',
+    textAlign: 'center',
+    marginTop: 24,
+    letterSpacing: 1,
+  },
+  versionSubtext: {
+    fontSize: 11,
     color: colors.textSecondary,
     fontFamily: 'Inter_400Regular',
     textAlign: 'center',
-    marginTop: 16,
-    marginBottom: 32,
+    marginTop: 4,
+    opacity: 0.6,
   },
 });

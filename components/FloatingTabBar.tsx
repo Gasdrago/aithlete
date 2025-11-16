@@ -15,6 +15,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  interpolate,
 } from 'react-native-reanimated';
 import { useTheme } from '@react-navigation/native';
 import { BlurView } from 'expo-blur';
@@ -47,21 +48,21 @@ export default function FloatingTabBar({
   const pathname = usePathname();
   const theme = useTheme();
 
-  const activeIndex = tabs.findIndex((tab) => {
+  const activeTabIndex = tabs.findIndex((tab) => {
     const tabPath = typeof tab.route === 'string' ? tab.route : tab.route.pathname;
     return pathname.startsWith(tabPath || '');
   });
 
-  const indicatorPosition = useSharedValue(activeIndex >= 0 ? activeIndex : 0);
+  const indicatorPosition = useSharedValue(activeTabIndex >= 0 ? activeTabIndex : 0);
 
   React.useEffect(() => {
-    if (activeIndex >= 0) {
-      indicatorPosition.value = withSpring(activeIndex, {
+    if (activeTabIndex >= 0) {
+      indicatorPosition.value = withSpring(activeTabIndex, {
         damping: 20,
         stiffness: 200,
       });
     }
-  }, [activeIndex]);
+  }, [activeTabIndex]);
 
   const handleTabPress = (route: Href) => {
     router.push(route);
@@ -69,7 +70,7 @@ export default function FloatingTabBar({
 
   const tabWidthPercent = 100 / tabs.length;
 
-  const animatedIndicatorStyle = useAnimatedStyle(() => {
+  const indicatorStyle = useAnimatedStyle(() => {
     return {
       left: `${indicatorPosition.value * tabWidthPercent}%`,
       width: `${tabWidthPercent}%`,
@@ -99,14 +100,15 @@ export default function FloatingTabBar({
           <View style={styles.topBorder} />
           <View style={styles.bottomBorder} />
           
-          {/* Active Tab Indicator with Marble Halo */}
-          <Animated.View style={[styles.indicator, animatedIndicatorStyle]}>
+          {/* Active Tab Indicator with Enhanced Marble Halo */}
+          <Animated.View style={[styles.indicator, indicatorStyle]}>
             <View style={styles.marbleHalo} />
+            <View style={styles.marbleGlow} />
           </Animated.View>
 
           <View style={styles.tabsContainer}>
             {tabs.map((tab, index) => {
-              const isActive = index === activeIndex;
+              const isActive = index === activeTabIndex;
 
               return (
                 <TouchableOpacity
@@ -116,12 +118,14 @@ export default function FloatingTabBar({
                   activeOpacity={0.7}
                 >
                   <View style={styles.tabContent}>
-                    <IconSymbol
-                      android_material_icon_name={tab.icon as any}
-                      ios_icon_name={tab.icon}
-                      size={24}
-                      color={isActive ? '#FFFFFF' : '#888888'}
-                    />
+                    <View style={[styles.iconWrapper, isActive && styles.iconWrapperActive]}>
+                      <IconSymbol
+                        android_material_icon_name={tab.icon as any}
+                        ios_icon_name={tab.icon}
+                        size={24}
+                        color={isActive ? '#FFFFFF' : '#888888'}
+                      />
+                    </View>
                     <Text
                       style={[
                         styles.tabLabel,
@@ -204,27 +208,33 @@ const styles = StyleSheet.create({
     top: 8,
     bottom: 8,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
     zIndex: 0,
   },
   marbleHalo: {
     ...StyleSheet.absoluteFillObject,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     ...Platform.select({
       ios: {
         shadowColor: '#FFFFFF',
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
+        shadowOpacity: 0.4,
+        shadowRadius: 12,
       },
       android: {
-        elevation: 4,
+        elevation: 6,
       },
       web: {
-        boxShadow: '0 0 20px rgba(255, 255, 255, 0.3)',
+        boxShadow: '0 0 24px rgba(255, 255, 255, 0.4)',
       },
     }),
+  },
+  marbleGlow: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.3)',
   },
   tabsContainer: {
     flexDirection: 'row',
@@ -243,6 +253,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+  },
+  iconWrapper: {
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconWrapperActive: {
+    ...Platform.select({
+      ios: {
+        shadowColor: '#FFFFFF',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.5,
+        shadowRadius: 8,
+      },
+      android: {
+        elevation: 4,
+      },
+      web: {
+        filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.5))',
+      },
+    }),
   },
   tabLabel: {
     fontSize: 11,
