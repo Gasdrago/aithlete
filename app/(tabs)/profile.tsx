@@ -1,91 +1,227 @@
+
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { IconSymbol } from "@/components/IconSymbol";
-import { GlassView } from "expo-glass-effect";
+import { ScrollView, StyleSheet, View, Text, TouchableOpacity, Platform } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import { colors } from "@/styles/commonStyles";
+import { IconSymbol } from "@/components/IconSymbol";
+
+interface SettingItemProps {
+  title: string;
+  icon: string;
+  onPress?: () => void;
+}
+
+const SettingItem: React.FC<SettingItemProps> = ({ title, icon, onPress }) => {
+  return (
+    <TouchableOpacity style={styles.settingItem} onPress={onPress} activeOpacity={0.7}>
+      <View style={styles.settingLeft}>
+        <IconSymbol
+          ios_icon_name="gear"
+          android_material_icon_name={icon}
+          size={24}
+          color={colors.text}
+        />
+        <Text style={styles.settingTitle}>{title}</Text>
+      </View>
+      <IconSymbol
+        ios_icon_name="chevron.right"
+        android_material_icon_name="chevron_right"
+        size={20}
+        color={colors.textSecondary}
+      />
+    </TouchableOpacity>
+  );
+};
 
 export default function ProfileScreen() {
   const theme = useTheme();
 
   return (
-    <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.colors.background }]} edges={['top']}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={[
-          styles.contentContainer,
-          Platform.OS !== 'ios' && styles.contentContainerWithTabBar
-        ]}
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
       >
-        <GlassView style={[
-          styles.profileHeader,
-          Platform.OS !== 'ios' && { backgroundColor: theme.dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)' }
-        ]} glassEffectStyle="regular">
-          <IconSymbol ios_icon_name="person.circle.fill" android_material_icon_name="person" size={80} color={theme.colors.primary} />
-          <Text style={[styles.name, { color: theme.colors.text }]}>John Doe</Text>
-          <Text style={[styles.email, { color: theme.dark ? '#98989D' : '#666' }]}>john.doe@example.com</Text>
-        </GlassView>
+        <View style={styles.header}>
+          <Text style={styles.title}>Profile</Text>
+        </View>
 
-        <GlassView style={[
-          styles.section,
-          Platform.OS !== 'ios' && { backgroundColor: theme.dark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)' }
-        ]} glassEffectStyle="regular">
-          <View style={styles.infoRow}>
-            <IconSymbol ios_icon_name="phone.fill" android_material_icon_name="phone" size={20} color={theme.dark ? '#98989D' : '#666'} />
-            <Text style={[styles.infoText, { color: theme.colors.text }]}>+1 (555) 123-4567</Text>
+        {/* Profile Card */}
+        <View style={styles.profileCard}>
+          <View style={styles.avatarContainer}>
+            <IconSymbol
+              ios_icon_name="person.circle.fill"
+              android_material_icon_name="account_circle"
+              size={80}
+              color={colors.text}
+            />
           </View>
-          <View style={styles.infoRow}>
-            <IconSymbol ios_icon_name="location.fill" android_material_icon_name="location-on" size={20} color={theme.dark ? '#98989D' : '#666'} />
-            <Text style={[styles.infoText, { color: theme.colors.text }]}>San Francisco, CA</Text>
+          <Text style={styles.profileName}>Athlete</Text>
+          <Text style={styles.profileEmail}>athlete@aithlete.app</Text>
+        </View>
+
+        {/* Stats Overview */}
+        <View style={styles.statsSection}>
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>0</Text>
+            <Text style={styles.statLabel}>Workouts</Text>
           </View>
-        </GlassView>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>0</Text>
+            <Text style={styles.statLabel}>Days Active</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>0</Text>
+            <Text style={styles.statLabel}>Achievements</Text>
+          </View>
+        </View>
+
+        {/* Settings Section */}
+        <View style={styles.settingsSection}>
+          <Text style={styles.sectionTitle}>Settings</Text>
+          <View style={styles.settingsCard}>
+            <SettingItem title="Edit Profile" icon="edit" />
+            <SettingItem title="Fitness Goals" icon="flag" />
+            <SettingItem title="Notifications" icon="notifications" />
+            <SettingItem title="Privacy" icon="lock" />
+            <SettingItem title="Units & Measurements" icon="straighten" />
+          </View>
+        </View>
+
+        {/* App Section */}
+        <View style={styles.settingsSection}>
+          <Text style={styles.sectionTitle}>App</Text>
+          <View style={styles.settingsCard}>
+            <SettingItem title="About AITHLETE" icon="info" />
+            <SettingItem title="Help & Support" icon="help" />
+            <SettingItem title="Terms of Service" icon="description" />
+            <SettingItem title="Privacy Policy" icon="policy" />
+          </View>
+        </View>
+
+        {/* Version */}
+        <Text style={styles.versionText}>AITHLETE v1.0.0</Text>
+
+        <View style={{ height: 120 }} />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    // backgroundColor handled dynamically
-  },
   container: {
     flex: 1,
   },
-  contentContainer: {
-    padding: 20,
+  scrollContent: {
+    paddingTop: Platform.OS === 'android' ? 60 : 60,
+    paddingHorizontal: 20,
   },
-  contentContainerWithTabBar: {
-    paddingBottom: 100, // Extra padding for floating tab bar
+  header: {
+    marginBottom: 32,
   },
-  profileHeader: {
-    alignItems: 'center',
-    borderRadius: 12,
+  title: {
+    fontSize: 32,
+    fontWeight: '700',
+    color: colors.text,
+    fontFamily: 'PlayfairDisplay_700Bold',
+  },
+  profileCard: {
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 20,
     padding: 32,
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  avatarContainer: {
     marginBottom: 16,
-    gap: 12,
   },
-  name: {
+  profileName: {
     fontSize: 24,
-    fontWeight: 'bold',
-    // color handled dynamically
+    fontWeight: '600',
+    color: colors.text,
+    fontFamily: 'PlayfairDisplay_600SemiBold',
+    marginBottom: 4,
   },
-  email: {
-    fontSize: 16,
-    // color handled dynamically
+  profileEmail: {
+    fontSize: 14,
+    color: colors.textSecondary,
+    fontFamily: 'Inter_400Regular',
   },
-  section: {
-    borderRadius: 12,
+  statsSection: {
+    flexDirection: 'row',
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 16,
     padding: 20,
-    gap: 12,
+    marginBottom: 32,
   },
-  infoRow: {
+  statItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  statDivider: {
+    width: 1,
+    backgroundColor: colors.border,
+  },
+  statValue: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: colors.text,
+    fontFamily: 'Inter_700Bold',
+    marginBottom: 4,
+  },
+  statLabel: {
+    fontSize: 12,
+    color: colors.textSecondary,
+    fontFamily: 'Inter_400Regular',
+    textAlign: 'center',
+  },
+  settingsSection: {
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: colors.text,
+    fontFamily: 'PlayfairDisplay_600SemiBold',
+    marginBottom: 12,
+  },
+  settingsCard: {
+    backgroundColor: colors.card,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: 16,
+    overflow: 'hidden',
+  },
+  settingItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  settingLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
   },
-  infoText: {
+  settingTitle: {
     fontSize: 16,
-    // color handled dynamically
+    color: colors.text,
+    fontFamily: 'Inter_400Regular',
+  },
+  versionText: {
+    fontSize: 12,
+    color: colors.textSecondary,
+    fontFamily: 'Inter_400Regular',
+    textAlign: 'center',
+    marginTop: 16,
+    marginBottom: 32,
   },
 });

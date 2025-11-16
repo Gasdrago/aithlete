@@ -1,11 +1,12 @@
+
 {
   "expo": {
-    "name": "Natively",
-    "slug": "Natively",
+    "name": "AITHLETE",
+    "slug": "AITHLETE",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/natively-dark.png",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/natively-dark.png",
@@ -14,9 +15,12 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.Natively",
+      "bundleIdentifier": "com.aithlete.app",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "AITHLETE needs access to your camera for posture analysis and body projection features.",
+        "NSPhotoLibraryUsageDescription": "AITHLETE needs access to your photo library to upload body photos for AI projection.",
+        "NSPhotoLibraryAddUsageDescription": "AITHLETE needs permission to save your workout progress photos."
       }
     },
     "android": {
@@ -25,7 +29,12 @@
         "backgroundColor": "#000000"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.Natively"
+      "package": "com.aithlete.app",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "web": {
       "favicon": "./assets/images/final_quest_240x240.png",
@@ -34,9 +43,21 @@
     "plugins": [
       "expo-font",
       "expo-router",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "AITHLETE needs access to your camera for posture analysis and body projection features."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "AITHLETE needs access to your photo library to upload body photos for AI projection."
+        }
+      ]
     ],
-    "scheme": "natively",
+    "scheme": "aithlete",
     "experiments": {
       "typedRoutes": true
     },
