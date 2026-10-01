@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     color: colors.text,
-    fontFamily: 'PlayfairDisplay_700Bold',
+    fontFamily: 'Cinzel_700Bold',
     marginBottom: 8,
     textAlign: 'center',
   },
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: colors.text,
-    fontFamily: 'PlayfairDisplay_600SemiBold',
+    fontFamily: 'Cinzel_600SemiBold',
     marginBottom: 12,
   },
   description: {

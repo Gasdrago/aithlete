@@ -1,23 +1,25 @@
 
 import { StyleSheet } from 'react-native';
 
-// AITHLETE Premium Black & White Color Palette with Liquid Glass & Greek Inspiration
+import { palette } from './olympus';
+
+// Legacy palette kept for older components; it now maps onto the Olympus design system.
 export const colors = {
-  background: '#000000',           // Pure Black
-  text: '#FFFFFF',                 // Pure White
-  textSecondary: '#AAAAAA',        // Soft Silver
-  primary: '#FFFFFF',              // White
-  secondary: '#DDDDDD',            // Light Silver
-  accent: '#CCCCCC',               // Metallic Silver
-  card: 'rgba(255, 255, 255, 0.05)', // Liquid Glass - Translucent White
-  highlight: 'rgba(255, 255, 255, 0.12)', // Active State Glass
-  border: 'rgba(255, 255, 255, 0.15)', // Greek Engraved Border
-  success: '#FFFFFF',
-  warning: '#CCCCCC',
-  error: '#FFFFFF',
-  glassLight: 'rgba(255, 255, 255, 0.08)', // Light Glass Layer
-  glassDark: 'rgba(0, 0, 0, 0.3)',         // Dark Glass Layer
-  marbleGlow: 'rgba(255, 255, 255, 0.2)',  // Marble Halo Effect
+  background: palette.night,
+  text: palette.ivory,
+  textSecondary: palette.stone,
+  primary: palette.gold,
+  secondary: palette.goldBright,
+  accent: palette.gold,
+  card: palette.surface,
+  highlight: palette.surfaceGold,
+  border: palette.border,
+  success: palette.laurel,
+  warning: palette.goldBright,
+  error: palette.wine,
+  glassLight: palette.surfaceStrong,
+  glassDark: 'rgba(0, 0, 0, 0.3)',
+  marbleGlow: 'rgba(212, 175, 106, 0.2)',
 };
 
 export const buttonStyles = StyleSheet.create({
@@ -66,7 +68,7 @@ export const commonStyles = StyleSheet.create({
     textAlign: 'center',
     color: colors.text,
     marginBottom: 12,
-    fontFamily: 'PlayfairDisplay_700Bold',
+    fontFamily: 'Cinzel_700Bold',
     letterSpacing: 2,
   },
   subtitle: {
@@ -75,7 +77,7 @@ export const commonStyles = StyleSheet.create({
     textAlign: 'center',
     color: colors.text,
     marginBottom: 10,
-    fontFamily: 'PlayfairDisplay_600SemiBold',
+    fontFamily: 'Cinzel_600SemiBold',
     letterSpacing: 1,
   },
   text: {
@@ -114,7 +116,7 @@ export const commonStyles = StyleSheet.create({
     padding: 24,
     marginVertical: 12,
     width: '100%',
-    shadowColor: '#FFFFFF',
+    shadowColor: '#D4AF6A',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.08,
     shadowRadius: 12,
@@ -128,7 +130,7 @@ export const commonStyles = StyleSheet.create({
     padding: 28,
     marginVertical: 16,
     width: '100%',
-    shadowColor: '#FFFFFF',
+    shadowColor: '#D4AF6A',
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.12,
     shadowRadius: 16,
