@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ActivityIndicator,
+  Image,
   Pressable,
   ScrollView,
   StyleProp,
@@ -20,6 +21,7 @@ import { Backdrop, CoinRim } from './ornaments';
 import Statue from './Statue';
 import type { Deity } from '@/data/pantheon';
 import { statueParamsFrom } from '@/utils/divinity';
+import { STATUE_IMAGES } from '@/data/statueImages';
 
 export type IconName = keyof typeof MaterialCommunityIcons.glyphMap;
 
@@ -301,12 +303,17 @@ export function Tablet({ value, label, icon }: { value: string | number; label: 
 /** A deity's bust struck on a golden coin. */
 export function DeityMedallion({ deity, size, veiled }: { deity: Deity; size: number; veiled?: boolean }) {
   const params = React.useMemo(() => statueParamsFrom(deity.body, deity.heightCm, deity.sex), [deity]);
+  const photo = STATUE_IMAGES[deity.id];
   return (
     <View style={{ width: size, height: size, borderRadius: size / 2, overflow: 'hidden', backgroundColor: '#15110C', alignItems: 'center', justifyContent: 'flex-start' }}>
       <LinearGradient colors={['#2A2116', '#0E0B08']} style={StyleSheet.absoluteFill} />
-      <View style={{ marginTop: size * 0.1 }}>
-        <Statue params={params} styleSpec={deity.style} width={size * 0.86} crop="bust" pedestal={false} veiled={veiled} material={deity.tier === 0 ? 'clay' : 'marble'} />
-      </View>
+      {photo ? (
+        <Image source={photo.bust} style={{ width: size, height: size, opacity: veiled ? 0.32 : 1 }} resizeMode="cover" />
+      ) : (
+        <View style={{ marginTop: size * 0.1 }}>
+          <Statue params={params} styleSpec={deity.style} width={size * 0.86} crop="bust" pedestal={false} veiled={veiled} material={deity.tier === 0 ? 'clay' : 'marble'} />
+        </View>
+      )}
       <CoinRim size={size} />
     </View>
   );
